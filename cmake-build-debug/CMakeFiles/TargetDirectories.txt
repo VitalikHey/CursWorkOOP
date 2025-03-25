@@ -1,0 +1,3 @@
+C:/Users/Виталий Курбанов/CLionProjects/CursWorkOOP/cmake-build-debug/CMakeFiles/CursWorkOOP.dir
+C:/Users/Виталий Курбанов/CLionProjects/CursWorkOOP/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Виталий Курбанов/CLionProjects/CursWorkOOP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
