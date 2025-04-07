@@ -2,18 +2,27 @@
 #define CURSWORKOOP_CURRENCY_H
 
 #include "../saving/saving.h"
+#include <limits>
 
-class Currency: public Saving {
-    double count;
+class Currency : public Saving {
+private:
+    double m_count;
+
 public:
-    Currency();
+    Currency() : m_count(0.0) {}
 
-    double getCount() const {
-        return count;
+    double getCount() const noexcept {
+        return m_count;
     }
 
-    static void setCount(double count) {
-        count = count;
+    void setCount(double newCount) {
+        if (newCount < 0) {
+            throw std::invalid_argument("Количество валюты не может быть отрицательным.");
+        }
+        if (newCount > std::numeric_limits<double>::max()) {
+            throw std::overflow_error("Слишком большое значение для количества валюты.");
+        }
+        m_count = newCount;
     }
 };
 
