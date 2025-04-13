@@ -4,9 +4,9 @@
 #include <string>
 
 class Saving {
-private:
     double m_rateToDollar;
     std::string m_name;
+    // Сделать enum с типами
     std::string m_typeSaving;
 
 public:

@@ -5,15 +5,11 @@
 #include <stdexcept>
 #include <limits>
 #include "../saving/saving.h"
+#include "../bank/bank.h"
+#include "../transaction-history/transactionHistory.h"
 
 class Transaction {
-private:
     std::map<std::string, Saving> m_currencies;
-    int m_rateToDollarSentSaving{};
-    int m_rateToDollarReceivedSaving{};
-    double m_resultTransaction{};
-    double m_sentSaving{};
-    double m_receivedSaving{};
 public:
     Transaction() = default;
 
@@ -32,9 +28,20 @@ public:
         return it->second;
     }
 
-    double conductTransaction(double amount, const std::string &fromCurrencyName, const std::string &toCurrencyName, const double commission) const {
+    double conductTransaction(double amount, const std::string &fromCurrencyName, const std::string &toCurrencyName,
+                              const Bank &bank) const {
         const Saving &fromCurrency = getCurrency(fromCurrencyName);
         const Saving &toCurrency = getCurrency(toCurrencyName);
+
+        if ((fromCurrency.getTypeSaving() == "CryptoCurrency" || toCurrency.getTypeSaving() == "CryptoCurrency") &&
+            !bank.getIsWorkWithCrypto()) {
+            throw std::runtime_error("Выбранный банк не работает с криптовалютой.");
+        }
+
+        if ((fromCurrency.getTypeSaving() == "Metal" || toCurrency.getTypeSaving() == "Metal") &&
+            !bank.getIsWorkWithMetal()) {
+            throw std::runtime_error("Выбранный банк не работает с металлами.");
+        }
 
         if (fromCurrency.getRateToDollar() == 0.0) {
             throw std::runtime_error("Невозможно конвертировать из валюты с нулевым курсом.");
@@ -45,21 +52,14 @@ public:
         }
 
         double amountInDollars = amount * fromCurrency.getRateToDollar();
+        double fee =
+                amountInDollars * (bank.getCommission() / 100.0);
 
-        // Вычисляем комиссию
-        double fee = amountInDollars * commission;
-
-        // Вычитаем комиссию из суммы в долларах
         amountInDollars -= fee;
-
 
         return amountInDollars / toCurrency.getRateToDollar();
     }
-
-    void updateRate(const std::string &currencyName, double newRate) {
-        Saving &currency = m_currencies.at(currencyName);
-        currency.setRateToDollar(newRate);
-    }
 };
+
 
 #endif

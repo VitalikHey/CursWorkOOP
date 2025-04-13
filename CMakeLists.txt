@@ -8,5 +8,7 @@ add_executable(CursWorkOOP main.cpp
         library/currency/currency.h
         library/metal/metal.h
         library/cryptocurrency/cryptocurrency.h
-        library/converter/transaction.h
+        library/transaction/transaction.h
+        library/bank/bank.h
+        library/transaction-history/transactionHistory.h
 )
