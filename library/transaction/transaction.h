@@ -13,25 +13,8 @@ class Transaction {
 public:
     Transaction() = default;
 
-    void addCurrency(const Saving &currency) {
-        if (m_currencies.count(currency.getName()) > 0) {
-            throw std::invalid_argument("Валюта с таким именем уже существует.");
-        }
-        m_currencies[currency.getName()] = currency;
-    }
-
-    const Saving &getCurrency(const std::string &name) const {
-        auto it = m_currencies.find(name);
-        if (it == m_currencies.end()) {
-            throw std::invalid_argument("Валюта с таким именем не найдена.");
-        }
-        return it->second;
-    }
-
-    double conductTransaction(double amount, const std::string &fromCurrencyName, const std::string &toCurrencyName,
-                              const Bank &bank) const {
-        const Saving &fromCurrency = getCurrency(fromCurrencyName);
-        const Saving &toCurrency = getCurrency(toCurrencyName);
+    double conductCurrencyTransaction(const Currency &fromCurrency, const Currency &toCurrency,
+                                      const Bank &bank) const {
 
         if ((fromCurrency.getTypeSaving() == "CryptoCurrency" || toCurrency.getTypeSaving() == "CryptoCurrency") &&
             !bank.getIsWorkWithCrypto()) {
@@ -51,15 +34,17 @@ public:
             throw std::runtime_error("Невозможно конвертировать в валюту с нулевым курсом.");
         }
 
-        double amountInDollars = amount * fromCurrency.getRateToDollar();
+        // Тут может ошибка в вычислениях
+
+        double amountInDollars = fromCurrency.getCount() * fromCurrency.getRateToDollar();
         double fee =
                 amountInDollars * (bank.getCommission() / 100.0);
+
 
         amountInDollars -= fee;
 
         return amountInDollars / toCurrency.getRateToDollar();
     }
 };
-
 
 #endif

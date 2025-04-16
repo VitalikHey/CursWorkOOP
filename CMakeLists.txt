@@ -11,4 +11,5 @@ add_executable(CursWorkOOP main.cpp
         library/transaction/transaction.h
         library/bank/bank.h
         library/transaction-history/transactionHistory.h
+        library/user-input-handler/userInputHandler.h
 )
