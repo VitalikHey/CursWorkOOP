@@ -9,6 +9,12 @@ class Metal : public Saving {
 private:
     double m_weight;
 public:
+    Metal(const std::string &name, const double rateToDollar) {
+        setName(name);
+        setRateToDollar(rateToDollar);
+        setTypeSaving("металл");
+    };
+
     Metal() : m_weight(0.0) {};
 
     double getWeight() const noexcept {

@@ -9,6 +9,11 @@ class Cryptocurrency : public Saving {
 private:
     double m_coins;
 public:
+    Cryptocurrency(const std::string& name, const double rateToDollar) {
+        setName(name);
+        setRateToDollar(rateToDollar);
+        setTypeSaving("металл");
+    }
     Cryptocurrency() : m_coins(0.0) {}
 
     double getCoins() const noexcept {

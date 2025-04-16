@@ -3,12 +3,17 @@
 
 #include "../saving/saving.h"
 #include <limits>
+#include <stdexcept>
 
 class Currency : public Saving {
 private:
-    double m_count;
+    double m_count{};
 
 public:
+    Currency(const std::string& name, const double rateToDollar) {
+        setName(name);
+        setRateToDollar(rateToDollar);
+    }
     Currency() : m_count(0.0) {}
 
     double getCount() const noexcept {
