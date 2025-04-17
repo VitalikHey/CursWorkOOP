@@ -15,4 +15,5 @@ add_executable(CursWorkOOP src/main.cpp
         src/local_db/local_db.cpp
         library/local_db/local_db.h
         library/user-interface/user-interface.h
+        library/test/test.h
 )
