@@ -22,6 +22,7 @@ private:
 
     static LocalDatabase *instance;
     static std::mutex mutex;
+
     void initializeData() {
         Bank alphaBank("Альфа Банк", 2, true, false);
         Bank sberBank("Сбербанк", 7, true, true);
@@ -40,6 +41,12 @@ private:
         Currency cny("CNY", 0.14);
         Currency kzt("KZT", 0.0019);
         Currency lir("LIR", 0.026);
+        Currency aed("AED", 0.36);
+        Currency usz("USZ", 0.00007);
+        Currency jpy("JPY", 0.007);
+        Currency thb("THB", 0.03);
+        Currency gel("GEL", 0.36);
+        Currency gbp("GBP", 1.32);
 
         Cryptocurrency bitcoin("Bitcoin", 83464.11);
         Cryptocurrency ethereum("Ethereum", 1567.69);
@@ -60,7 +67,13 @@ private:
                 rub,
                 cny,
                 kzt,
-                lir
+                lir,
+                aed,
+                usz,
+                jpy,
+                thb,
+                gel,
+                gbp
         };
 
         cryptocurrencyMap = {
