@@ -73,9 +73,6 @@ private:
                 silver,
                 platinum
         };
-
-        std::cout << "База данных инициализирована" << std::endl;
-
     }
 
 public:
