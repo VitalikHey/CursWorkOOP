@@ -9,41 +9,21 @@ private:
     double m_rateToDollar;
     std::string m_name;
     std::string m_typeSaving;
+
 public:
-    Saving() : m_rateToDollar(0.0), m_name(""), m_typeSaving("") {}
+    Saving();
 
-    double getRateToDollar() const noexcept {
-        return m_rateToDollar;
-    }
+    double getRateToDollar() const noexcept;
 
-    std::string getName() const {
-        return m_name;
-    }
+    std::string getName() const;
 
-    std::string getTypeSaving() const {
-        return m_typeSaving;
-    }
+    std::string getTypeSaving() const;
 
-    void setRateToDollar(double rate) {
-        if (rate < 0) {
-            throw std::invalid_argument("Курс не может быть отрицательным");
-        }
-        m_rateToDollar = rate;
-    }
+    void setRateToDollar(double rate);
 
-    void setName(const std::string &name) {
-        if (name.empty()) {
-            throw std::invalid_argument("Имя не может быть пустым");
-        }
-        m_name = name;
-    }
+    void setName(const std::string &name);
 
-    void setTypeSaving(const std::string &type) {
-        if (type.empty()) {
-            throw std::invalid_argument("Тип не может быть пустым");
-        }
-        m_typeSaving = type;
-    }
+    void setTypeSaving(const std::string &type);
 };
 
 #endif

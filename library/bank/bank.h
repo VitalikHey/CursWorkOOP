@@ -11,45 +11,19 @@ private:
     bool m_isWorkWithMetal;
 
 public:
-    Bank(const std::string& name, int commission, bool isWorkWithCrypto, bool isWorkWithMetal) :
-            m_name(name),
-            m_commission(commission),
-            m_isWorkWithCrypto(isWorkWithCrypto),
-            m_isWorkWithMetal(isWorkWithMetal) {
-    }
+    Bank(const std::string& name, int commission, bool isWorkWithCrypto, bool isWorkWithMetal);
 
-    std::string getName() const {
-        return m_name;
-    }
+    std::string getName() const;
+    void setName(const std::string &newName);
 
-    void setName(const std::string &newName) {
-        m_name = newName;
-    }
+    int getCommission() const;
+    void setCommission(int newCommission);
 
-    int getCommission() const {
-        return m_commission;
-    }
+    bool getIsWorkWithCrypto() const;
+    void setIsWorkWithCrypto(bool newIsWorkWithCrypto);
 
-    void setCommission(int newCommission) {
-        m_commission = newCommission;
-    }
-
-    bool getIsWorkWithCrypto() const {
-        return m_isWorkWithCrypto;
-    }
-
-    void setIsWorkWithCrypto(bool newIsWorkWithCrypto) {
-        m_isWorkWithCrypto = newIsWorkWithCrypto;
-    }
-
-    bool getIsWorkWithMetal() const {
-        return m_isWorkWithMetal;
-    }
-
-    void setIsWorkWithMetal(bool newIsWorkWithMetal) {
-        m_isWorkWithMetal = newIsWorkWithMetal;
-    }
+    bool getIsWorkWithMetal() const;
+    void setIsWorkWithMetal(bool newIsWorkWithMetal);
 };
-
 
 #endif

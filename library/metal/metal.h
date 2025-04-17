@@ -8,28 +8,15 @@
 class Metal : public Saving {
 private:
     double m_weight;
+
 public:
-    Metal(const std::string &name, const double rateToDollar) {
-        setName(name);
-        setRateToDollar(rateToDollar);
-        setTypeSaving("металл");
-    };
+    Metal(const std::string &name, const double rateToDollar);
 
-    Metal() : m_weight(0.0) {};
+    Metal();
 
-    double getWeight() const noexcept {
-        return m_weight;
-    }
+    double getWeight() const noexcept;
 
-    void setWeight(double newWeight) {
-        if (newWeight < 0) {
-            throw std::invalid_argument("Вес металла не может быть отрицательным.");
-        }
-        if (newWeight > std::numeric_limits<double>::max()) {
-            throw std::overflow_error("Слишком большое значение для веса металла.");
-        }
-        m_weight = newWeight;
-    }
+    void setWeight(double newWeight);
 };
 
 #endif
