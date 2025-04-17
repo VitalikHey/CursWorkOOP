@@ -10,16 +10,16 @@ private:
     Transaction transaction;
     TransactionHistory transactionHistory;
     UserInputHandler handler;
-    LocalDatabase database;
+    LocalDatabase* database;
 
 public:
-    UserInterface() : database(initializeLocalDatabase()) {}
+    UserInterface() : database(LocalDatabase::getInstance()) {}
 
     void run() {
         SetConsoleOutputCP(CP_UTF8);
 
         while (true) {
-            Bank selectedBank = handler.selectBank(database.banks);
+            Bank selectedBank = handler.selectBank(database->banks);
 
             std::variant<Metal, Cryptocurrency, Currency> from, to;
 
@@ -27,11 +27,11 @@ public:
 
             try {
                 if (fromTypeSaving == "металл") {
-                    from = handler.getMetalFromInputHandler(database.metalMap, true);
+                    from = handler.getMetalFromInputHandler(database->metalMap, true);
                 } else if (fromTypeSaving == "криптовалюта") {
-                    from = handler.getCryptoCurrencyFromInputHandler(database.cryptocurrencyMap, true);
+                    from = handler.getCryptoCurrencyFromInputHandler(database->cryptocurrencyMap, true);
                 } else if (fromTypeSaving == "валюта") {
-                    from = handler.getCurrencyFromInputHandler(database.currencyMap, true);
+                    from = handler.getCurrencyFromInputHandler(database->currencyMap, true);
                 } else {
                     std::cout << "Неизвестный тип сбережения (from)." << std::endl;
                     continue;
@@ -43,11 +43,11 @@ public:
 
             try {
                 if (fromTypeSaving == "металл") {
-                    to = handler.getMetalFromInputHandler(database.metalMap, false);
+                    to = handler.getMetalFromInputHandler(database->metalMap, false);
                 } else if (fromTypeSaving == "криптовалюта") {
-                    to = handler.getCryptoCurrencyFromInputHandler(database.cryptocurrencyMap, false);
+                    to = handler.getCryptoCurrencyFromInputHandler(database->cryptocurrencyMap, false);
                 } else if (fromTypeSaving == "валюта") {
-                    to = handler.getCurrencyFromInputHandler(database.currencyMap, false);
+                    to = handler.getCurrencyFromInputHandler(database->currencyMap, false);
                 } else {
                     std::cout << "Неизвестный тип сбережения (to)." << std::endl;
                     continue;
