@@ -5,6 +5,7 @@
 #include <stdexcept>
 
 class Saving {
+private:
     double m_rateToDollar;
     std::string m_name;
     std::string m_typeSaving;

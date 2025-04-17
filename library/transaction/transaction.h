@@ -9,8 +9,11 @@
 #include "../bank/bank.h"
 #include "../transaction-history/transactionHistory.h"
 #include "../metal/metal.h"
+#include "../cryptocurrency/cryptocurrency.h"
+#include "../currency/currency.h"
 
 class Transaction {
+private:
     std::map<std::string, Saving> m_currencies;
 public:
     Transaction() = default;

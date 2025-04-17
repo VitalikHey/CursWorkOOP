@@ -12,6 +12,7 @@
 
 
 class UserInputHandler {
+private:
     std::string m_typeSaving;
 public:
 
@@ -26,16 +27,14 @@ public:
             std::string choice;
             std::getline(std::cin, choice);
 
-            // Убираем пробелы в начале и конце строки.
             choice.erase(0, choice.find_first_not_of(' '));
             choice.erase(choice.find_last_not_of(' ') + 1);
-
 
             try {
                 int option = std::stoi(choice);
 
                 if (option >= 1 && option <= static_cast<int>(banks.size())) {
-                    return banks[option - 1]; // Возвращаем выбранный Bank. Вычитаем 1, т.к. индексация начинается с 0.
+                    return banks[option - 1];
                 } else {
                     std::cout << "Некорректный ввод. Пожалуйста, выберите номер от 1 до " << banks.size() << "."
                               << std::endl;
@@ -59,7 +58,6 @@ public:
             std::string choice;
             std::getline(std::cin, choice);
 
-            // Убираем пробелы в начале и конце строки.
             choice.erase(0, choice.find_first_not_of(' '));
             choice.erase(choice.find_last_not_of(' ') + 1);
 
@@ -78,9 +76,9 @@ public:
                         break;
                     default:
                         std::cout << "Некорректный ввод. Пожалуйста, выберите номер от 1 до 3." << std::endl;
-                        continue; // Возвращаемся к началу цикла while.
+                        continue;
                 }
-                break; // Выходим из цикла, если ввод корректен.
+                break;
 
             } catch (const std::invalid_argument &e) {
                 std::cerr << "Ошибка: Некорректный ввод. Пожалуйста, введите число." << std::endl;
@@ -89,52 +87,11 @@ public:
             }
         }
 
-        // Преобразуем sentTypeSaving в нижний регистр для согласованности.
         std::transform(m_typeSaving.begin(), m_typeSaving.end(), m_typeSaving.begin(), ::tolower);
 
         std::cout << "Выбранный тип сбережения: " << m_typeSaving
-                  << std::endl;  // Выводим выбранный тип для подтверждения
+                  << std::endl;
         return m_typeSaving;
-    }
-
-    template<typename T>
-    // Используем шаблон для обобщения типа
-    T getItemToInput(const std::vector<Metal> &metals,
-                     const std::vector<Currency> &currencies,
-                     const std::vector<Cryptocurrency> &cryptocurrencies
-    ) {
-        if (m_typeSaving == "валюта") {
-            while (true) {
-                std::cout << "Выберите валюту в которую хотите перевести:" << std::endl;
-                for (size_t i = 0; i < currencies.size(); ++i) {
-                    std::cout << i + 1 << ". " << currencies[i].getName() << std::endl;
-                }
-                std::cout << "Введите номер выбранной валюты: ";
-
-                std::string choice;
-                std::getline(std::cin, choice);
-
-                choice.erase(0, choice.find_first_not_of(' '));
-                choice.erase(choice.find_last_not_of(' ') + 1);
-
-
-                try {
-                    int option = std::stoi(choice);
-
-                    if (option >= 1 && option <= static_cast<int>(currencies.size())) {
-                        return currencies[option - 1];
-                    } else {
-                        std::cout << "Некорректный ввод. Пожалуйста, выберите номер от 1 до " << currencies.size()
-                                  << "."
-                                  << std::endl;
-                    }
-                } catch (const std::invalid_argument &e) {
-                    std::cerr << "Ошибка: Некорректный ввод. Пожалуйста, введите число." << std::endl;
-                } catch (const std::out_of_range &e) {
-                    std::cerr << "Ошибка: Введенное число слишком велико или мало." << std::endl;
-                }
-            }
-        }
     }
 
     Currency getCurrencyFromInputHandler(const std::vector<Currency> &currencies, const bool isFrom) {
@@ -273,8 +230,6 @@ public:
             }
         }
     }
-
-
 };
 
 #endif

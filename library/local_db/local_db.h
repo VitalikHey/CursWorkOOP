@@ -9,6 +9,7 @@
 #include "../metal/metal.h"
 
 struct LocalDatabase {
+public:
     std::vector<Bank> banks;
     std::vector<Currency> currencyMap;
     std::vector<Cryptocurrency> cryptocurrencyMap;
@@ -17,4 +18,4 @@ struct LocalDatabase {
 
 LocalDatabase initializeLocalDatabase();
 
-#endif //CURSWORKOOP_LOCAL_DB_H
+#endif
